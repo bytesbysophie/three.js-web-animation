@@ -1,7 +1,9 @@
 function init(){ 
     const color1 = "Turquoise"
     const color2 = "purple"
+    const backgroundColor = "#191b1c"
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(backgroundColor)
 
     // Create the cammera 
     const camera = new THREE.PerspectiveCamera(
@@ -17,17 +19,21 @@ function init(){
     document.body.appendChild(renderer.domElement)
 
     // Create a 3d Box^^
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const geometry = new THREE.TorusGeometry(1, 0.15, 16, 100);
+    const geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
 
     // Create a color material 
     // const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 
     // Create a color gradient material
     var material = new THREE.ShaderMaterial(getColorGradientParam(geometry, color1, color2, 2));
-    
-    // Create cube by combining geometry with material and add it to the scene
-    const cube = new THREE.Mesh( geometry, material );
+    var material1 = new THREE.ShaderMaterial(getColorGradientParam(geometry, color1, color2, 1));
+
+    // Create torus & cube by combining geometry with material and add it to the scene
+    const torus = new THREE.Mesh( geometry, material );
+    const cube = new THREE.Mesh( geometry1, material1 );
     scene.add( cube );
+    scene.add( torus );
 
     // Adjust camera position to make the object visable
     camera.position.z = 5;
@@ -37,6 +43,8 @@ function init(){
         // Change x and y position of the camera to create the rotation effect
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.02;
+        torus.rotation.x += 0.02;
+        torus.rotation.y += 0.03;
     
         // Render the scene according to the camera settings
         renderer.render(scene, camera)
