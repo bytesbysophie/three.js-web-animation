@@ -1,10 +1,13 @@
 function init(){ 
-    const color1 = "Turquoise"
-    const color2 = "purple"
+    const color1 = "#ca00fd"
+    const color2 = "#4ec4c2"
     const backgroundColor = "#191b1c"
+    const transparentBackground = true
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(backgroundColor)
 
+    if (!backgroundColor) {
+        scene.background = new THREE.Color(backgroundColor)
+    }
     // Create the cammera 
     const camera = new THREE.PerspectiveCamera(
         fov = 75, // vertical field of view
@@ -14,7 +17,7 @@ function init(){
     );
     
     // Create the renderer with antialias to ensure smooth borders of the rendered objects
-    const renderer = new THREE.WebGLRenderer({antialias: true});
+    const renderer = new THREE.WebGLRenderer({antialias: true,  alpha: transparentBackground});
     renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(renderer.domElement)
 
