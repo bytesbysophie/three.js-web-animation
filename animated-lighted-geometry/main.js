@@ -1,3 +1,5 @@
+// SEE: https://codepen.io/bytesbysophie/pen/mdwLWOy 
+
 function init(){ 
     // const color1 = "#078fa1"
     const color1 = "#a843ec"
@@ -5,7 +7,7 @@ function init(){
     const transparentBackground = true
     const scene = new THREE.Scene();
 
-    if (!backgroundColor) {
+    if (!transparentBackground) {
         scene.background = new THREE.Color(backgroundColor)
     }
 
